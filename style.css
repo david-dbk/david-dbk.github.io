@@ -1,0 +1,53 @@
+body {
+  margin: 0;
+  font-family: Georgia, "Times New Roman", serif;
+  background: #fafafa;
+  color: #111;
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 40px 20px;
+}
+
+h1, h2 {
+  font-weight: normal;
+}
+
+a {
+  color: #111;
+}
+
+a:hover {
+  text-decoration: none;
+}
+
+.intro {
+  margin-bottom: 24px;
+}
+
+.post-list {
+  list-style: none;
+  padding: 0;
+}
+
+.post-list li {
+  margin: 12px 0;
+}
+
+.post-list span {
+  display: inline-block;
+  width: 110px;
+  color: #666;
+}
+
+article {
+  max-width: 720px;
+}
+
+.back {
+  margin-bottom: 24px;
+  display: inline-block;
+}
