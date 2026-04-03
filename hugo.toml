@@ -1,7 +1,7 @@
-baseURL = "https://david-dbk.github.io"
+baseURL = "https://david-dbk.github.io/"
 title = "Personal Blog of David Debeljak (david-dbk)"
 languageCode = "en-us"
-theme = "PaperMod"
+theme = ["PaperMod"]
 
 [params]
   defaultTheme = "dark"
