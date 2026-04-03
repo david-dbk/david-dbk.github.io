@@ -8,17 +8,28 @@
 </head>
 <body>
   <main class="container">
-    <a class="back" href="../index.html">← Back to home</a>
+    <header class="site-header">
+      <div>
+        <h1 class="site-title">David</h1>
+        <p class="site-subtitle">Personal blog</p>
+      </div>
 
-    <article>
+      <div class="header-actions">
+        <a href="../index.html">Home</a>
+        <button id="theme-toggle" aria-label="Toggle theme">☀</button>
+      </div>
+    </header>
+
+    <article class="post-page">
+      <p class="post-meta">2026-04-03</p>
       <h1>My first post</h1>
-      <p><em>2026-04-03</em></p>
 
       <p>
-        Welcome to my blog! I am hosting it on GitHub Pages.
+        Welcome to my blog! This is built on html, css and js. It is hosted on GitHub Pages.
       </p>
-
     </article>
   </main>
+
+  <script src="../script.js"></script>
 </body>
 </html>

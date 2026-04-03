@@ -8,25 +8,42 @@
 </head>
 <body>
   <main class="container">
-    <header>
-      <h1>David</h1>
-      <p class="intro">
-        "My name is David and I'm currently studying informationstechnology.\nI want to treat this as my personal journal, where I will write down some of my thoughts on various things that I've learned and that might be helpful to someone."
-      </p>
-      <nav>
-        <a href="https://github.com/david-dbk">GitHub</a>
-      </nav>
+    <header class="site-header">
+      <div>
+        <h1 class="site-title">David</h1>
+        <p class="site-subtitle">Personal blog</p>
+      </div>
+
+      <div class="header-actions">
+        <a href="https://github.com/david-dbk" target="_blank" rel="noopener noreferrer">GitHub</a>
+        <button id="theme-toggle" aria-label="Toggle theme">☀</button>
+      </div>
     </header>
 
-    <section>
+    <section class="hero">
+      <h2>Welcome to my blog</h2>
+      <p>
+        My name is David and I'm currently studying informationstechnology.
+        I want to use this site as a personal journal where I write down some
+        of my thoughts and things I learn along the way.
+      </p>
+    </section>
+
+    <section class="posts-section">
       <h2>Posts</h2>
-      <ul class="post-list">
-        <li>
-          <span>2026-04-03</span>
-          <a href="posts/first-post.html">My first post</a>
-        </li>
-      </ul>
+
+      <article class="post-card">
+        <a class="post-link" href="posts/first-post.html">
+          <h3>My first post</h3>
+          <p>
+            Welcome to my blog! This is built on html, css and js. It is hosted on GitHub Pages.
+          </p>
+          <span class="post-meta">2026-04-03</span>
+        </a>
+      </article>
     </section>
   </main>
+
+  <script src="script.js"></script>
 </body>
 </html>
