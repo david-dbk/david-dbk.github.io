@@ -1,0 +1,26 @@
+baseURL = "https://david-dbk.github.io"
+title = "Personal Blog of David Debeljak (david-dbk)"
+languageCode = "en-us"
+theme = "PaperMod"
+
+[params]
+  defaultTheme = "dark"
+  ShowReadingTime = false
+  ShowShareButtons = false
+  ShowPostNavLinks = false
+  ShowCodeCopyButtons = false
+  ShowToc = false
+
+  author = "David Debeljak"
+  description = "Blog about technology and learning"
+
+[params.homeInfoParams]
+  Title = "Welcome to my blog!"
+  Content = "My name is David and I'm currently studying informationstechnology.\nI want to treat this as my personal journal, where I will write down some of my thoughts on various things that I've learned and that might be helpful to someone."
+
+[menu]
+  [[menu.main]]
+    identifier = "posts"
+    name = "Posts"
+    url = "/posts/"
+    weight = 10
