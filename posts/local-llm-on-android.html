@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Running a local LLM on Android with Termux and llama.cpp</title>
+  <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+  <main class="container">
+    <header class="site-header">
+      <div>
+        <p class="site-subtitle">Personal blog of David Debeljak</p>
+      </div>
+
+      <div class="header-actions">
+        <a href="../index.html">Home</a>
+        <button id="theme-toggle" aria-label="Toggle theme">☀</button>
+      </div>
+    </header>
+
+    <article class="post-page">
+      <p class="post-meta">last edited (DD/MM/YYYY): 06/04/2026</p>
+      <h1>Running a local LLM on Android with Termux and llama.cpp</h1>
+
+      <p>
+        In this post I want to show how I ran a local LLM on my Samsung S21 Ultra with Android 15 and OneUI7.0 
+        using the app Termux, llama.cpp tools, and an open sourced LLM.
+      </p>
+  
+      <figure>
+        <img src="../images/Screenshot_20260405_110432_Termux_cropped.jpg" alt="Termux running llama-cli on an Android phone, loaded with Qwen3.5-0.8B">
+        <figcaption>Image caption: Termux running llama-cli on an Android phone, loaded with Qwen3.5-0.8B</figcaption>
+      </figure>
+
+      <h2>Why I tried this</h2>
+      <p>
+        tldr: I like running local LLMs on the PC and wanted to try it on my phone
+      </p>
+      
+      <p>
+        me yapping:
+      </p>
+      
+      <p>
+        Maybe I should start out by mentioning that I have high regards for online privacy and want to become more conscious about how I browse the web and the personal information I share. Although, I am very impressed by LLMs that are distributed by frontier model providers, I'm thinking how the users also represent a pool of data for further training of closed source models and data mining.
+      </p>
+      
+      <p>
+        The fact that we can get comfortable using closed source LLMs and send very personal thoughts and prompts to the cloud for inference had me think more thoroughly, if I should really send certain prompts. Even though providers offer opt-outs for training a model on your conversations, I am still sceptical.
+      </p>
+      
+      <p>
+        My fascination of using LLMs grew, and not long ago, I've stumbled upon the r/localLLaMA reddit community, which is a great place if you want to be informed about the latest model releases and see interesting home labs, setups and projects that people are working on. Further, it is a good place if you want to discuss LLMs and compare setups, parameter settings and learn new things about this fun hobby.
+      </p>
+      
+      <p>
+        Since I have a somewhat decent desktop PC, I had the hardware to potentially run basic local models. After first trying out ollama+OpenWebUI and later LM Studio, I was excited. Text inference on my own hardware, even if I turn off the WiFi, was fun to experience.
+      </p>
+      
+      <p>
+        Not much later I found out about llama.cpp-server and llama.cpp-CLI, which offer a more lightweight UI and, in my basic testing, higher tokens per second (TPS) without having to rely on wrappers of the aforementioned approaches. The downside of this route is, it does come with a slightly higher learning curve and requires more time to set up, compared to LM Studio for example.
+      </p>
+      
+      <p>
+        Later, seeing how models ran well on my desktop PC and laptop, I was curious to find if my phone could load a model generate text. A common app I saw recommended was "Pocketpal" from Google Play Store, which I installed and tried and it worked pretty well and had a nice UI. However, I was curious to see if there were other approaches to this.
+      </p>
+      
+      <p>
+        Before that thought occurred, I had already installed an app called "Termux", also from Google Play Store. Termux is a terminal emulator app for Android. On non-rooted Android, it cannot execute certain system calls and operates within a restricted environment. In my case my phone is not rooted, but still it was fun to be able to use the certain linux CLI commands, as known from desktop on the phone.
+      </p>
+      
+      <p>
+        I've seen Termux used in many ways, one being to use it to host a Minecraft server on a phone, serving to players connected to the same local network, which I have tried and it did work. So I was thinking, if I can use these linux commands on my PC to run local models, maybe it could also work on my phone. That's the reason why I attempted this.
+      </p>
+
+      <h2>What I used</h2>
+      <ul>
+        <li>Samsung S21 Ultra</li>
+        <li>Termux</li>
+        <li><code>llama-cpp-cli</code></li>
+        <li><code>llama-cpp-server</code></li>
+        <li>Qwen3.5-0.8B with Q5_K_M quantization from huggingface.co</li>
+        <li>(Bonsai-8B-GGUF-1bit from huggingface.co, although this is a newer model and required a different setup, which I might write about at a later time)</li>
+      </ul>
+
+      <h2>Installation</h2>
+      <p>I installed the needed tools in Termux:</p>
+
+      <pre><code>
+      pkg update && pkg upgrade -y
+      pkg install llama-cpp -y
+      </code></pre>
+
+      <h2>Downloading a model</h2>
+      <p>
+        I downloaded a GGUF model in the browser and saved it to my device.
+        Then I opened the download folder shortcut in the browser, selected the GGUF file -> open with: Termux
+        Now the file is accessible in Termux.
+      </p>
+
+      <figure>
+        <img src="../images/Screenshot_20260405_104913_hf.jpg" alt="Huggingface Qwen3.5-0.8B model page from unsloth">
+        <figcaption>Image caption: Huggingface Qwen3.5-0.8B model page from unsloth</figcaption>
+      </figure>
+
+      <h2>Running it in the terminal</h2>
+      <p>
+        After that, I loaded the model and started chatting through the command line.
+      </p>
+
+      <pre><code>llama-cli -m /path/to/model.gguf</code></pre>
+
+      <figure>
+        <img src="../images/Screenshot_20260405_110432_Termux.jpg" alt="Chatting with a model in llama-cli inside Termux">
+        <figcaption>Image caption: Chatting with the model through the CLI</figcaption>
+      </figure>
+
+      <h2>Running it in the browser</h2>
+      <p>
+        I also tried to run the model in llama-server, which gives a more readable UI in your web browser.
+        To do this, run the below command to start a local server and open it in the browser by writing localhost:8080 or 127.0.0.1:8080 in the address bar.
+      </p>
+
+      <pre><code>llama-server -m /path/to/model.gguf</code></pre>
+
+      <p>
+        With the previous command I had only achieved 3-4 TPS, so just by adding the parameter "-t 6", which dedicates 6 threads of the CPU, increased it to 7-8 TPS.
+        This is to show that there is potential to increase generation speed with various parameters.
+      </p>
+      <pre><code>llama-server -m /path/to/model.gguf -t 6</code></pre>
+
+      <figure>
+        <img src="../images/Screenshot_20260405_224028_llama-server-1.jpg" alt="Browser interface connected to llama-server on Android">
+        <figcaption>Image caption: The model accessible through my phone browser via localhost:8080, while Termux is open in the background</figcaption>
+      </figure>
+
+      <figure>
+        <img src="../images/Screenshot_20260405_224028_llama-server-2.jpg" alt="Browser interface connected to llama-server on Android">
+        <figcaption>Image caption: 7,3 TPS in llama-server</figcaption>
+      </figure>
+
+      <h2>Conclusion</h2>
+      <p>
+        Running an open source LLM on my phone like this was a fun experience, especially considering it is a 2021 device, so newer phones should often offer an even more enjoyable experience.
+      </p>
+      <p>
+        This is by no means a guide on how to do it best, as I have done only surface level testing.
+        There are various parameters that can be adjusted, depending on your device, to increase TPS and achieve a more optimal setup.
+      </p>
+      <p>
+        Maybe this has motivated you to try this on your phone and I hope you find some of this helpful!
+      </p>
+    </article>
+  </main>
+
+  <script src="../script.js"></script>
+</body>
+</html>
