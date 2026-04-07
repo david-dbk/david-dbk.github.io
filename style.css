@@ -5,6 +5,7 @@
   --muted: #6b7280;
   --border: #e5e7eb;
   --link: #111827;
+  --accent: #2563eb;
   --card-hover: #eaecef;
 }
 
@@ -15,6 +16,7 @@ html.dark {
   --muted: #9ca3af;
   --border: #2a313c;
   --link: #f3f4f6;
+  --accent: #7fb3ff;
   --card-hover: #222a35;
 }
 
@@ -126,15 +128,15 @@ body {
   border-radius: 18px;
   transition: background 0.2s ease, transform 0.15s ease;
   overflow: hidden;
-  margin-bottom: 24px; /* Add spacing between cards */
+  margin-bottom: 24px;
 }
 
 .post-card + .post-card {
-  margin-top: 24px; /* Additional spacing between consecutive cards */
+  margin-top: 24px;
 }
 
 .post-card:last-child {
-  margin-bottom: 0; /* Remove extra margin from last card */
+  margin-bottom: 0;
 }
 
 .post-card:hover {
@@ -176,6 +178,32 @@ body {
   margin: 0 0 1.2em;
 }
 
+/* General content links */
+.post-page a,
+.hero a,
+.license-note a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.post-page a:hover,
+.hero a:hover,
+.license-note a:hover {
+  text-decoration: underline;
+}
+
+.post-page a:visited,
+.hero a:visited,
+.license-note a:visited {
+  color: var(--accent);
+}
+
+/* Mail links */
+a[href^="mailto:"] {
+  color: var(--accent);
+  font-weight: 500;
+}
+
 img {
   max-width: 100%;
   height: auto;
@@ -194,11 +222,6 @@ figure figcaption {
   font-style: italic;
 }
 
-.post-card:hover {
-  background: var(--card-hover);
-  transform: translateY(-2px);
-}
-
 @media (max-width: 640px) {
   .site-header {
     flex-direction: column;
@@ -214,4 +237,31 @@ figure figcaption {
   .post-page h1 {
     font-size: 1.7rem;
   }
+}
+
+.site-footer {
+  margin-top: 64px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  color: var(--muted);
+  font-size: 0.95rem;
+}
+
+.site-footer a {
+  color: var(--muted);
+  text-decoration: none;
+}
+
+.site-footer a:hover {
+  text-decoration: underline;
+}
+
+.license-note {
+  flex-basis: 100%;
+  margin-top: 4px;
+  font-size: 0.9rem;
+  color: var(--muted);
 }
